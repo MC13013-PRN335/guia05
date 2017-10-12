@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Tipo post - guia 5</title>
+    </h:head>
+    <h:body>
+        <h1>Tipo post</h1>
+        <h:form>
+            <h:selectBooleanCheckbox id="chkMostrarFiltrado" value="#{frmTipoPost.soloUsados}">
+                <p:ajax update=":tipoPost"/>
+            </h:selectBooleanCheckbox>
+            <h:outputLabel value="Mostrar solamente los utilizados" />
+        </h:form>
+
+        <p:dataTable id="tipoPost" var="tp" value="#{frmTipoPost.tipoPost}">                    
+            <p:column headerText="ID" >
+                <h:outputText value="${tp.idTipoPost}" />
+            </p:column>
+            <p:column headerText="nombre" >
+                <h:outputText value="${tp.nombre}" />
+            </p:column>
+            <p:column headerText="activo" >
+                <h:outputText value="${tp.activo}" />
+            </p:column>
+            <p:column headerText="descripcion" >
+                <h:outputText value="${tp.descripcion}" />
+            </p:column>
+        </p:dataTable>
+
+        <h:form>
+            <h2>Crear nuevo registro:</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nombre:" class="texto"/>
+                <h:inputText id="txtNombre" value="#{frmTipoPost.nuevoTipoPost.nombre}" required="true"/>
+                <h:outputLabel value="Activo:" class="texto"/>
+                <h:selectBooleanCheckbox id="chkActivo" value="#{frmTipoPost.nuevoTipoPost.activo}"/>
+                <h:outputLabel value="Descripcion:" class="texto"/>
+                <h:inputTextarea id="txtDescripcion" value="#{frmTipoPost.nuevoTipoPost.descripcion}" required="false" rows="3"/>
+
+                <h:commandButton value="Limpiar" actionListener="#{frmTipoPost.limpiar()}" />
+                <h:commandButton value="Guardar" actionListener="#{frmTipoPost.guardar()}" />
+            </h:panelGrid>
+        </h:form>
+
+    </h:body>
+</html>
+
